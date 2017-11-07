@@ -1,0 +1,5 @@
+ans_num = 1 right_ratio = 0.0
+ans_num = 3 right_ratio = 0.16464976592173836
+ans_num = 5 right_ratio = 0.26424344139210315
+ans_num = 7 right_ratio = 0.327047080646586
+ans_num = 9 right_ratio = 0.37165444748697113
