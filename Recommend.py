@@ -111,12 +111,12 @@ class UserCf(object):
 
     def all_test(self):
         with open("result2.txt", "w", encoding="UTF-8") as f:
-            # for i in range(11, 20):
-            #     for j in range(1, 6):
-            #         print("cf top_user_k = {} top_answer_k = {} right_ratio = {}".format(i, j, self._test("cf", i, j)))
-            #         f.write(
-            #             "cf top_user_k = {} top_answer_k = {} right_ratio = {}\n".format(i, j, self._test("cf", i, j)))
-            for i in range(20,30):
+            for i in range(1, 20):
+                for j in range(1, 6):
+                    print("cf top_user_k = {} top_answer_k = {} right_ratio = {}".format(i, j, self._test("cf", i, j)))
+                    f.write(
+                        "cf top_user_k = {} top_answer_k = {} right_ratio = {}\n".format(i, j, self._test("cf", i, j)))
+            for i in range(1,20):
                 for j in range(1, 6):
                     print(
                         "iif top_user_k = {} top_answer_k = {} right_ratio = {}".format(i, j, self._test("iif", i, j)))
