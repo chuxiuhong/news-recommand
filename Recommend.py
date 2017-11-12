@@ -10,15 +10,19 @@ class UserCf(object):
         self.type = "cf"
         # 选定测试时的类型
         self.items = []
+        #初始化新闻列表，元素是item那个nametuple形式
         self.user_similarity_dict = {}
         # 相似矩阵的字典实现
         self.news_dict = {}
+        #记录新闻与用户的倒排字典
         self.user_dict = {}
+        #记录用户与新闻的倒排字典
         self.most_popular = ""
         # 记录最流行的新闻，用于冷启动
         with open("train_id.txt", "r", encoding="UTF-8") as f:
             for i in f.readlines():
                 self.items.append(item(i.split()[0], i.split()[1], i.split()[2]))
+
 
     def user_similarity(self, data_range):
         for i in range(data_range[0], data_range[1]):
@@ -28,6 +32,7 @@ class UserCf(object):
             if self.items[i].user_id not in self.user_dict:
                 self.user_dict[self.items[i].user_id] = set()
             self.user_dict[self.items[i].user_id].add(self.items[i].news_id)
+            #将两个字典初始化
         if self.type == "cf":
             # 常规的usercf算法
             for i in self.user_dict:
@@ -43,6 +48,7 @@ class UserCf(object):
             for i in self.user_similarity_dict:
                 for j in self.user_similarity_dict[i]:
                     self.user_similarity_dict[i][j] /= len(self.user_dict[i]) * len(self.user_dict[j])
+                    #usercf的评分，用的是普通的余弦相似度
         elif self.type == "iif":
             # 增加了对热门新闻惩罚项的usercf算法
             for i in self.user_dict:
@@ -55,6 +61,7 @@ class UserCf(object):
                                 self.user_similarity_dict[i][k] = 1 / log(1 + len(self.news_dict[j]))
                             else:
                                 self.user_similarity_dict[i][k] += 1 / log(1 + len(self.news_dict[j]))
+                        #在usercf上增加了热门惩罚
         times = 0
         for i in self.news_dict:
             if len(self.news_dict[i]) > times:
@@ -86,7 +93,7 @@ class UserCf(object):
                     for m in tmp_ans_dict:
                         tmp_ans_list.append((m, tmp_ans_dict[m]))
                     tmp_ans_list.sort(key=lambda x: x[1], reverse=True)
-                    answer.append(tmp_ans_list[0][:top_answer_k])
+                    answer.append([a[0] for a in tmp_ans_list[:top_answer_k]])
                 else:
                     answer.append(self.most_popular)
         return answer
@@ -110,19 +117,15 @@ class UserCf(object):
         return right / answer_num
 
     def all_test(self):
-        with open("result2.txt", "w", encoding="UTF-8") as f:
+        with open("result.txt", "w", encoding="UTF-8") as f:
             for i in range(1, 20):
-                for j in range(1, 6):
-                    print("cf top_user_k = {} top_answer_k = {} right_ratio = {}".format(i, j, self._test("cf", i, j)))
-                    f.write(
-                        "cf top_user_k = {} top_answer_k = {} right_ratio = {}\n".format(i, j, self._test("cf", i, j)))
-            for i in range(1,20):
-                for j in range(1, 6):
-                    print(
-                        "iif top_user_k = {} top_answer_k = {} right_ratio = {}".format(i, j, self._test("iif", i, j)))
-                    f.write(("iif top_user_k = {} top_answer_k = {} right_ratio = {}\n".format(i, j,
-                                                                                               self._test("iif", i,
-                                                                                                          j))))
+                print("cf top_user_k = {} top_answer_k = {} right_ratio = {}".format(i, 5, self._test("cf", i, 5)))
+                f.write(
+                    "cf top_user_k = {} top_answer_k = {} right_ratio = {}\n".format(i, 5, self._test("cf", i, 5)))
+            for i in range(1, 20):
+                print(
+                    "iif top_user_k = {} top_answer_k = {} right_ratio = {}".format(i, 5, self._test("iif", i, 5)))
+                f.write(("iif top_user_k = {} top_answer_k = {} right_ratio = {}\n".format(i, 5,self._test("iif", i,5))))
 
 
 class TimeCf(object):
@@ -155,11 +158,11 @@ class TimeCf(object):
         while tmp < ans_num:
             if self.sort_items[p1].news_id == self.sort_items[p2].news_id:
                 p2 -= 1
-                if p2 <0:
+                if p2 < 0:
                     break
             else:
                 point_value.append(p2)
-                p1=p2
+                p1 = p2
                 tmp += 1
         tmp = 1
         p1 = point
@@ -171,7 +174,7 @@ class TimeCf(object):
                     break
             else:
                 point_value.append(p2)
-                p1=p2
+                p1 = p2
                 tmp += 1
         return tuple(point_value)
 
@@ -193,13 +196,13 @@ class TimeCf(object):
         length = len(self.items)
         self.train((0, int(length * 0.8)))
         with open("result_time.txt", "w", encoding="UTF-8") as f:
-            for i in (1, 3, 5,7,9):
+            for i in (1, 3, 5, 7, 9):
                 print("ans_num = {} right_ratio = {}".format(i, self.predcit((int(length * 0.8), length), i)))
                 f.write("ans_num = {} right_ratio = {}\n".format(i, self.predcit((int(length * 0.8), length), i)))
 
 
 if __name__ == "__main__":
     uc = UserCf()
-    uc._test("iif",100,3)
+    uc.all_test()
     # tc = TimeCf()
     # tc._test()
