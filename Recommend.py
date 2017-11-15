@@ -312,6 +312,28 @@ class LfmModel(object):
             rating.extend([0.0] * self.select_ratio)
         return sample_list, rating
 
+    def get_candidate(self, user_id):
+        candidate = []
+        for news_id in self.user_dict[user_id]:
+            mid = self._find_news(news_id)
+            n = 0
+            l = mid - 1
+            r = mid + 1
+            while n < 10:
+                if l >= 0:
+                    if self.news[l] not in self.user_dict[user_id]:
+                        candidate.append(self.news[l][0])
+                        n += 1
+                        if n == self.select_ratio:
+                            break
+                if r < len(self.news):
+                    if self.news[r] not in self.user_dict[user_id]:
+                        candidate.append(self.news[r][0])
+                        n += 1
+                l -= 1
+                r += 1
+        return candidate
+
     def train(self):
         self.all_users = list(self.user_dict)
         self.all_users.sort()
@@ -321,34 +343,38 @@ class LfmModel(object):
                 for j in range(len(sample)):
                     err = rating[j] - np.dot(self.p[i], self.q[sample[j]])
                     self.p[i] += self.alpha * (err * self.q[sample[j]] - self.lambda_ * self.p[i])
+                    # print("delta" + str(self.alpha * (err * self.q[sample[j]] - self.lambda_ * self.p[i])))
                     self.q[sample[j]] += self.alpha * (err * self.p[i] - self.lambda_ * self.q[sample[j]])
-        self.alpha *= 0.9
+                    # print(self.p)
+            self.alpha *= 0.9
         print("train model complete!")
+        print(self.p)
+        print(self.q)
 
     def predict(self):
-        #data_num = len(self.items) - int(len(self.items) * self.train_data_ratio)
+        # data_num = len(self.items) - int(len(self.items) * self.train_data_ratio)
         right = 0
-        data_num  = 1000
-        for i in range(int(len(self.items) * self.train_data_ratio), int(len(self.items) * self.train_data_ratio)+100):
+        data_num = 2000
+        for i in range(int(len(self.items) * self.train_data_ratio),
+                       int(len(self.items) * self.train_data_ratio) + 2000):
             user = self._find_user(self.items[i].user_id)
             if user is None:
                 data_num -= 1
                 continue
             news_rating = []
-            for j in range(len(self.news)):
-                if self.news[j][0] not in self.user_dict[self.items[i].user_id]:
-                    news_rating.append((self.news[j][0], np.dot(self.p[user], self.q[self._find_news(self.news[j][0])])))
+            candidate = self.get_candidate(self.items[i].user_id)
+            for j in range(len(candidate)):
+                news_rating.append((candidate[j], np.dot(self.p[user], self.q[self._find_news(candidate[j])])))
             news_rating.sort(key=lambda x: x[1], reverse=True)
             for nr in news_rating[:self.top_k]:
                 if nr[0] == self.items[i].news_id:
                     right += 1
                     break
-
         return right / data_num
 
 
 def lfm_test():
-    lm = LfmModel(100, 3, 0.02, 0.01, 0.8, 5, 2)
+    lm = LfmModel(K=100, epoch=20, alpha=0.02, lambda_=0.01, train_data_ratio=0.8, top_k=5, select_ratio=2)
     lm.train()
     print(lm.predict())
 
