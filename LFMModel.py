@@ -3,7 +3,7 @@ from collections import namedtuple
 
 item = namedtuple("item", ["user_id", "news_id", "time_slot"])
 
-
+#LFM暂时还没有完成
 class LfmModel(object):
     def __init__(self, K, epoch, alpha, lambda_, train_data_ratio, top_k, select_ratio):
         """

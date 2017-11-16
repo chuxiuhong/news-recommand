@@ -44,6 +44,7 @@ class UsercfTime(UserCf):
                         with_time = []
                         for t in range(len(tmp_ans_list)):
                             if abs(news_time_dict[tmp_ans_list[t][0]] - self.items[i].time_slot) < 604800:
+                                #要求推荐的新闻时间必须在7天之内
                                 with_time.append(tmp_ans_list[t])
                         answer.append([a[0] for a in with_time[:top_answer_k]])
                     else:
