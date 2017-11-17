@@ -124,7 +124,7 @@ class UserCf(object):
                 print("cf top_user_k = {} top_answer_k = {} right_ratio = {}".format(i, 5, self._test("cf", i, 5)))
                 f.write(
                     "cf top_user_k = {} top_answer_k = {} right_ratio = {}\n".format(i, 5, self._test("cf", i, 5)))
-            for i in range(50,60):
+            for i in range(50, 60):
                 print(
                     "iif top_user_k = {} top_answer_k = {} right_ratio = {}".format(i, 5, self._test("iif", i, 5)))
                 f.write(

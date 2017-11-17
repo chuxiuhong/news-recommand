@@ -43,8 +43,8 @@ class UsercfTime(UserCf):
                     if len(tmp_ans_list) > 2 * top_answer_k:
                         with_time = []
                         for t in range(len(tmp_ans_list)):
-                            if abs(news_time_dict[tmp_ans_list[t][0]] - self.items[i].time_slot) < 604800:
-                                #要求推荐的新闻时间必须在7天之内
+                            if abs(news_time_dict[tmp_ans_list[t][0]] - self.items[i].time_slot) < 259200:
+                                # 要求推荐的新闻时间必须在7天之内
                                 with_time.append(tmp_ans_list[t])
                         answer.append([a[0] for a in with_time[:top_answer_k]])
                     else:
@@ -56,15 +56,16 @@ class UsercfTime(UserCf):
 
     def all_test(self):
         with open("result_UserCFTime2.txt", "w", encoding="UTF-8") as f:
-            for i in range(50, 60):
+            for i in range(60,80):
                 print("cf top_user_k = {} top_answer_k = {} right_ratio = {}".format(i, 5, self._test("cf", i, 5)))
                 f.write(
                     "cf top_user_k = {} top_answer_k = {} right_ratio = {}\n".format(i, 5, self._test("cf", i, 5)))
-            for i in range(50,60):
+            for i in range(1, 60):
                 print(
                     "iif top_user_k = {} top_answer_k = {} right_ratio = {}".format(i, 5, self._test("iif", i, 5)))
                 f.write(
                     ("iif top_user_k = {} top_answer_k = {} right_ratio = {}\n".format(i, 5, self._test("iif", i, 5))))
+
 
 if __name__ == "__main__":
     uct = UsercfTime()

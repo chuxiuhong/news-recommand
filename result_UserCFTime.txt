@@ -1,3 +1,4 @@
+推荐新闻在前后7天之内的
 cf top_user_k = 1 top_answer_k = 5 right_ratio = 0.05582545711509584
 cf top_user_k = 2 top_answer_k = 5 right_ratio = 0.09067220210228778
 cf top_user_k = 3 top_answer_k = 5 right_ratio = 0.11783411359420545
@@ -116,3 +117,67 @@ iif top_user_k = 56 top_answer_k = 5 right_ratio = 0.27113329211200426
 iif top_user_k = 57 top_answer_k = 5 right_ratio = 0.27179577775814856
 iif top_user_k = 58 top_answer_k = 5 right_ratio = 0.2719724405971204
 iif top_user_k = 59 top_answer_k = 5 right_ratio = 0.2725465948237788
+
+
+---------------------------------------------------------------
+时间过滤要求在前后三天之内
+cf top_user_k = 1 top_answer_k = 5 right_ratio = 0.06002119954067662
+cf top_user_k = 2 top_answer_k = 5 right_ratio = 0.09707623001501633
+cf top_user_k = 3 top_answer_k = 5 right_ratio = 0.12158819892235669
+cf top_user_k = 4 top_answer_k = 5 right_ratio = 0.13991696846568324
+cf top_user_k = 5 top_answer_k = 5 right_ratio = 0.153078349969084
+cf top_user_k = 6 top_answer_k = 5 right_ratio = 0.16654889144068546
+cf top_user_k = 7 top_answer_k = 5 right_ratio = 0.17582369048670612
+cf top_user_k = 8 top_answer_k = 5 right_ratio = 0.18452433530606838
+cf top_user_k = 9 top_answer_k = 5 right_ratio = 0.195830757000265
+cf top_user_k = 10 top_answer_k = 5 right_ratio = 0.2055472131437152
+cf top_user_k = 11 top_answer_k = 5 right_ratio = 0.21424785796307746
+cf top_user_k = 12 top_answer_k = 5 right_ratio = 0.22043105732709126
+cf top_user_k = 13 top_answer_k = 5 right_ratio = 0.22392014839678473
+cf top_user_k = 14 top_answer_k = 5 right_ratio = 0.22811589082236552
+cf top_user_k = 15 top_answer_k = 5 right_ratio = 0.2303241763095133
+cf top_user_k = 16 top_answer_k = 5 right_ratio = 0.23292995318434767
+cf top_user_k = 17 top_answer_k = 5 right_ratio = 0.23562406147866796
+cf top_user_k = 18 top_answer_k = 5 right_ratio = 0.2378765126755587
+cf top_user_k = 19 top_answer_k = 5 right_ratio = 0.24167476371345287
+cf top_user_k = 20 top_answer_k = 5 right_ratio = 0.2442363748785443
+cf top_user_k = 21 top_answer_k = 5 right_ratio = 0.24754880310926597
+cf top_user_k = 22 top_answer_k = 5 right_ratio = 0.24905043724052645
+cf top_user_k = 23 top_answer_k = 5 right_ratio = 0.2501987456938433
+cf top_user_k = 24 top_answer_k = 5 right_ratio = 0.25267202543944883
+cf top_user_k = 25 top_answer_k = 5 right_ratio = 0.2547478137973677
+cf top_user_k = 26 top_answer_k = 5 right_ratio = 0.2564261107676
+cf top_user_k = 27 top_answer_k = 5 right_ratio = 0.25770691635014575
+cf top_user_k = 28 top_answer_k = 5 right_ratio = 0.2586343962547478
+cf top_user_k = 29 top_answer_k = 5 right_ratio = 0.2600476989665224
+cf top_user_k = 30 top_answer_k = 5 right_ratio = 0.26159349880752586
+cf top_user_k = 31 top_answer_k = 5 right_ratio = 0.2633159614875011
+cf top_user_k = 32 top_answer_k = 5 right_ratio = 0.2638459500044166
+cf top_user_k = 33 top_answer_k = 5 right_ratio = 0.2660100697818214
+cf top_user_k = 34 top_answer_k = 5 right_ratio = 0.26596590407207843
+cf top_user_k = 35 top_answer_k = 5 right_ratio = 0.267423372493596
+cf top_user_k = 36 top_answer_k = 5 right_ratio = 0.26813002384948326
+cf top_user_k = 37 top_answer_k = 5 right_ratio = 0.2691458351735712
+cf top_user_k = 38 top_answer_k = 5 right_ratio = 0.27100079498277535
+cf top_user_k = 39 top_answer_k = 5 right_ratio = 0.27161911491917673
+cf top_user_k = 40 top_answer_k = 5 right_ratio = 0.27153078349969084
+cf top_user_k = 41 top_answer_k = 5 right_ratio = 0.27289992050172246
+cf top_user_k = 42 top_answer_k = 5 right_ratio = 0.273385743308895
+cf top_user_k = 43 top_answer_k = 5 right_ratio = 0.27462238318169774
+cf top_user_k = 44 top_answer_k = 5 right_ratio = 0.27568236021552867
+cf top_user_k = 45 top_answer_k = 5 right_ratio = 0.2760356858934723
+cf top_user_k = 46 top_answer_k = 5 right_ratio = 0.2772723257662751
+cf top_user_k = 47 top_answer_k = 5 right_ratio = 0.27828813709036304
+cf top_user_k = 48 top_answer_k = 5 right_ratio = 0.27917145128522214
+cf top_user_k = 49 top_answer_k = 5 right_ratio = 0.280319759738539
+cf top_user_k = 50 top_answer_k = 5 right_ratio = 0.27987810264110946
+cf top_user_k = 51 top_answer_k = 5 right_ratio = 0.28067308541648267
+cf top_user_k = 52 top_answer_k = 5 right_ratio = 0.28164473103082766
+cf top_user_k = 53 top_answer_k = 5 right_ratio = 0.28226305096722903
+cf top_user_k = 54 top_answer_k = 5 right_ratio = 0.28243971380620086
+cf top_user_k = 55 top_answer_k = 5 right_ratio = 0.2828813709036304
+cf top_user_k = 56 top_answer_k = 5 right_ratio = 0.28411801077643317
+cf top_user_k = 57 top_answer_k = 5 right_ratio = 0.284338839325148
+cf top_user_k = 58 top_answer_k = 5 right_ratio = 0.28473633071283455
+cf top_user_k = 59 top_answer_k = 5 right_ratio = 0.28592880487589434
+cf top_user_k = 60 top_answer_k = 5 right_ratio = 0.2832346965815741
